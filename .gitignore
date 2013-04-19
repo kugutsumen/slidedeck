@@ -1,3 +1,10 @@
+# Dart generated files
+pubspec.lock
+packages
+web/out/
+
+
+
 # Compiled source #
 ###################
 *.com
