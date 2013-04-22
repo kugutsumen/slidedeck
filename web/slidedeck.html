@@ -1,11 +1,175 @@
 <!DOCTYPE html>
 <html>
-<body>
-An empty {{ html5 }} slide deck.
-<script type="application/dart">
-var html5 = "HTML5";
+<head>
+<link rel="stylesheet" media="all" 
+  href="file:///XXX/theme/css/default.css">
+</head>
+<body style="opacity: 0" >
+<slides class="layout-widescreen">
 
-main() {}
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/google_developers_logo.png"></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar">
+      <img src="images/google_developers_icon_128.png">
+    </aside>
+    <hgroup class="auto-fadein">
+      <h1>{{ presentation_title }}</h1>
+      <h2>{{ subtitle }}</h2>
+      <p>{{ authors }}</p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Slide with Bullets</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Titles are formatted as Open Sans with bold applied and font size 
+          is set at 45</li>
+        <li>Title capitalization is title case
+          <ul>
+            <li>Subtitle capitalization is title case</li>
+          </ul>
+        </li>
+        <li>Subtitle capitalization is title case</li>
+        <li>Titles and subtitles should never have a period at the end</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Slide with Bullets that Build</h2>
+      <h3>Subtitle Placeholder</h3>
+    </hgroup>
+    <article>
+      <p>A list where items build:</p>
+      <ul class="build">
+        <li>Pressing 'h' highlights code snippets</li>
+        <li>Pressing 'p' toggles speaker notes (if they're on the current 
+          slide)</li>
+        <li>Pressing 'f' toggles fullscreen viewing</li>
+        <li>Pressing 'w' toggles widescreen</li>
+        <li>Pressing 'o' toggles overview mode</li>
+        <li>Pressing 'ESC' toggles off these goodies</li>
+      </ul>
+      <p>Another list, but items fade as they build:</p>
+      <ul class="build fade">
+        <li>Hover over me!</li>
+        <li>Hover over me!</li>
+      </ul>
+    </article>
+  </slide>
+
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right">
+      <img src="images/google_developers_icon_128.png">
+    </aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Thank You!&gt;</h2>
+      <p>Important contact information goes here.</p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      {{ contact_info }}
+    </p>
+  </slide>
+
+  <slide class="logoslide dark nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/google_developers_logo_white.png"></span>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script type="application/dart">
+import 'dart:async';
+import 'dart:html';
+
+var presentation_title = 'Our Awesome preso in Dart';
+var subtitle = 'A subtitle';
+var authors = 'Emily Fortuna and Siggi Cherem';
+var contact_info = '';
+
+main() {
+  new Timer(new Duration(), present);  
+}
+
+present() {
+  document.body.classes.add('loaded');
+  var p = new Presentation();
+}
+
+class Presentation {
+  int _currentSlideIndex;
+  List<Element> _slides;
+
+  Presentation() : _currentSlideIndex = 0 {
+    KeyboardEventStream.onKeyDown(document.body).listen(handleKeydown);
+    _slides = document.queryAll('slide:not([hidden]):not(.backdrop)');
+    _slides[_currentSlideIndex].classes.add('current');
+  }
+
+  handleKeydown(KeyEvent e) {
+    switch (e.keyCode) {
+      case KeyCode.RIGHT:
+      case KeyCode.SPACE:
+      case KeyCode.PAGE_DOWN:
+      case KeyCode.DOWN:
+        next();
+        break;
+      case KeyCode.LEFT:
+      case KeyCode.BACKSPACE:
+      case KeyCode.PAGE_UP:
+      case KeyCode.UP:
+        previous();
+        break;
+      }
+    }
+
+  /**
+   * Attempt to make the next incremental item on this particular slide appear. 
+   * Return true if we successfully built something additional onto the slide.
+   */
+  bool buildNextItem() {
+    //TODO
+    return false;
+  }
+
+  Element get currentSlide => _slides[_currentSlideIndex];
+
+  /**
+   * Move to the next item, be it building in the next item on the current
+   * slide, or advancing to the next slide.
+   */
+  next() {
+    if (!buildNextItem()) {
+      // Move to next slide, if possible.
+      if(_currentSlideIndex < _slides.length - 1) {
+        currentSlide.classes.remove('current');
+        _currentSlideIndex++;
+        currentSlide.classes.add('current');
+      }
+    }
+  }
+
+  previous() {
+    if(_currentSlideIndex > 0) {
+      currentSlide.classes.remove('current');
+      _currentSlideIndex--;
+      currentSlide.classes.add('current'); 
+    }
+  }
+}
 </script>
 </body>
 </html>
