@@ -2,6 +2,8 @@
 <html>
 <head>
 <link rel="stylesheet" media="all" href="../theme/css/default.css">
+<link rel="components" href="package:widget/components/accordion.html">
+<link rel="components" href="package:widget/components/collapse.html">
 <script type="text/javascript" src="../js_deck/js/prettify/prettify.js"></script>
 <script type="text/javascript" src="../dart_prettify/lang-dart.js"></script>
 </head>
@@ -120,6 +122,49 @@ Iterable get selected =>
     </article>
   </slide>
 
+  <slide>
+    <hgroup>
+      <h2>An example</h2>
+      <h3>using components</h3>
+    </hgroup>
+    <article>
+      <table style="border-bottom: none"><tr></tr>
+      <tr>
+        <td>
+          <pre class="prettyprint" data-lang="html">
+          some code
+          </pre>
+        </td>
+        <td width="50%" style="vertical-align: top">
+          <div  style="background-color: #e6e6e6">
+            <x-accordion>
+              <x-collapse>
+                <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse">The wolf</a>
+                </div>
+                <p>One wolf liked blowing down pig houses with his breath.</p>
+              </x-collapse>
+              <x-collapse>
+                <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse">2 pigs</a>
+                </div>
+                <p>Two little pigs were running from the wolf until they found
+                   their brother.
+                 </p>
+              </x-collapse>
+              <x-collapse>
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse">The brick
+                   house</a>
+                </div>
+                <p>Three little pigs lived happily in a brick house.</p>
+                </x-collapse>
+            </x-accordion>
+          </div>
+        </td>
+      </tr></table>
+    </article>
+  </slide>
 
   <slide class="thank-you-slide segue nobackground">
     <aside class="gdbar right">

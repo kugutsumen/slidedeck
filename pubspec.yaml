@@ -1,5 +1,9 @@
 name: slidedeck
 dependencies:
+  widget:
+    # Ideally we should use a pub dependency here, but the latest version
+    # doesn't work in M4
+    git: git://github.com/kevmoo/widget.dart.git
   web_ui: any
   browser: any
   js: any
