@@ -113,10 +113,26 @@ class Presentation {
   int _currentSlideIndex;
   List<Element> _slides;
 
-  Presentation() : _currentSlideIndex = 0 {
+  Presentation() {
     KeyboardEventStream.onKeyDown(document.body).listen(handleKeydown);
     _slides = document.queryAll('slide:not([hidden]):not(.backdrop)');
+    try {
+      _currentSlideIndex = int.parse(window.location.hash.substring(1));
+    } catch (Exception) {
+      _currentSlideIndex = 0;
+    }
+    initBuildInLists();
     _slides[_currentSlideIndex].classes.add('current');
+  }
+
+  void initBuildInLists() {
+    var buildItems = document.queryAll('.build > *');
+    for (Element item in buildItems) {
+      item.classes.add('to-build');
+      if (item.parent.classes.contains('fade')) {
+        item.classes.add('fade');
+      }
+    }
   }
 
   handleKeydown(KeyEvent e) {
@@ -133,16 +149,36 @@ class Presentation {
       case KeyCode.UP:
         previous();
         break;
-      }
     }
+  }
 
   /**
    * Attempt to make the next incremental item on this particular slide appear. 
-   * Return true if we successfully built something additional onto the slide.
+   * Return true if we successfully built something additional onto the slide,
+   * false if there was nothing additional to build onto this slide.
    */
   bool buildNextItem() {
-    //TODO
-    return false;
+    var itemToBuildNext = currentSlide.query('.to-build');
+    var currentlyBuilt = currentSlide.query('.build-current');
+
+    if (currentlyBuilt != null) {
+      currentlyBuilt.classes.remove('build-current');
+      if (currentlyBuilt.classes.contains('fade')) {
+        currentlyBuilt.classes.add('build-fade');
+      }
+    }
+
+    if (itemToBuildNext == null) {
+      // Go to next slide.
+      // TODO(efortuna): Change this when jQuery CL goes in.
+      currentSlide.queryAll('.build-fade').forEach(
+          (e) => e.classes.remove('build-fade'));
+      return false;
+    } else {
+      itemToBuildNext.classes.remove('to-build');
+      itemToBuildNext.classes.add('build-current');
+      return true;
+    }
   }
 
   Element get currentSlide => _slides[_currentSlideIndex];
@@ -155,18 +191,46 @@ class Presentation {
     if (!buildNextItem()) {
       // Move to next slide, if possible.
       if(_currentSlideIndex < _slides.length - 1) {
-        currentSlide.classes.remove('current');
         _currentSlideIndex++;
-        currentSlide.classes.add('current');
+        _updateSlides();
       }
     }
   }
 
+  _updateSlides() {
+    var currentSlide = _currentSlideIndex;
+
+    // Remove all slide classes because we're advancing them all.
+    // TODO(efortuna): jQuery update.
+    _slides.forEach((slide) => slide.classes.removeAll(
+        ['far-past', 'past', 'current', 'next', 'far-next']));
+
+    for (int i = 0; i < _slides.length; i++) {
+      switch(i) {
+        case currentSlide - 2:
+          _slides[i].classes.add('far-past');
+          break;
+        case currentSlide - 1:
+          _slides[i].classes.add('past');
+          break;
+        case currentSlide:
+          _slides[i].classes.add('current');
+          break;
+        case currentSlide + 1:
+          _slides[i].classes.add('next');
+          break;
+        case currentSlide + 2:
+          _slides[i].classes.add('far-next');
+          break;
+      }
+    }
+    window.location.replace('#$_currentSlideIndex');
+  }
+
   previous() {
     if(_currentSlideIndex > 0) {
-      currentSlide.classes.remove('current');
       _currentSlideIndex--;
-      currentSlide.classes.add('current'); 
+      _updateSlides();
     }
   }
 }
