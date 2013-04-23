@@ -2,5 +2,6 @@ name: slidedeck
 dependencies:
   web_ui: any
   browser: any
+  js: any
 dev_dependencies:
   unittest: any

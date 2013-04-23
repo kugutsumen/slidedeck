@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" media="all" 
-  href="file:///XXX/theme/css/default.css">
+<link rel="stylesheet" media="all" href="../theme/css/default.css">
+<script type="text/javascript" src="../js_deck/js/prettify/prettify.js"></script>
+<script type="text/javascript" src="../dart_prettify/lang-dart.js"></script>
 </head>
-<body style="opacity: 0" >
+<body style="opacity: 0">
 <slides class="layout-widescreen">
 
   <slide class="logoslide nobackground">
     <article class="flexbox vcenter">
-      <span><img src="images/google_developers_logo.png"></span>
+      <span><img src="../../../images/google_developers_logo.png"></span>
     </article>
   </slide>
 
   <slide class="title-slide segue nobackground">
     <aside class="gdbar">
-      <img src="images/google_developers_icon_128.png">
+      <img src="../../../images/google_developers_icon_128.png">
     </aside>
     <hgroup class="auto-fadein">
       <h1>{{ presentation_title }}</h1>
@@ -30,7 +31,7 @@
     </hgroup>
     <article>
       <ul>
-        <li>Titles are formatted as Open Sans with bold applied and font size 
+        <li>Titles are formatted as Open Sans with bold applied and font size
           is set at 45</li>
         <li>Title capitalization is title case
           <ul>
@@ -52,7 +53,7 @@
       <p>A list where items build:</p>
       <ul class="build">
         <li>Pressing 'h' highlights code snippets</li>
-        <li>Pressing 'p' toggles speaker notes (if they're on the current 
+        <li>Pressing 'p' toggles speaker notes (if they're on the current
           slide)</li>
         <li>Pressing 'f' toggles fullscreen viewing</li>
         <li>Pressing 'w' toggles widescreen</li>
@@ -67,10 +68,62 @@
     </article>
   </slide>
 
+  <slide>
+    <hgroup>
+      <h2>An example</h2>
+      <h3>one below the other</h3>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="html">
+&lt;b>Text&lt;/b>: <b>{{'{{' | final }} variable }}</b>&lt;br>
+&lt;input type="text" <b>bind-value="variable"</b>>
+</pre>
+      <pre data-lang="Running Demo">
+        <b>Text</b>: {{ variable }}<br>
+        <input type="text" bind-value="variable">
+      </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>An example</h2>
+      <h3>side by side</h3>
+    </hgroup>
+    <article>
+      <table style="border-bottom: none"><tr></tr>
+      <tr>
+        <td>
+<pre class="prettyprint" data-lang="html">
+&lt;input type="text" bind-value="filter">
+&lt;ul>
+  &lt;li template repeat="e in selected">{{'{{'}}e}}&lt;/li>
+&lt;/ul>
+</pre>
+<pre class="prettyprint" data-lang="dart">
+List list = ['one', 'two', 'three',
+             'four', 'five', 'six', 'seven'];
+String filter = '';
+Iterable get selected =>
+     list.where((e) => e.contains(filter));
+</pre>
+        </td>
+        <td width="50%" style="vertical-align: top">
+          <div  style="background-color: #e6e6e6">
+          <input type="text" bind-value="filter">
+          <ul>
+            <li template repeat="e in selected">{{e}}</li>
+          </ul>
+          </div>
+        </td>
+      </tr></table>
+    </article>
+  </slide>
+
 
   <slide class="thank-you-slide segue nobackground">
     <aside class="gdbar right">
-      <img src="images/google_developers_icon_128.png">
+      <img src="../../../images/google_developers_icon_128.png">
     </aside>
     <article class="flexbox vleft auto-fadein">
       <h2>&lt;Thank You!&gt;</h2>
@@ -83,7 +136,7 @@
 
   <slide class="logoslide dark nobackground">
     <article class="flexbox vcenter">
-      <span><img src="images/google_developers_logo_white.png"></span>
+      <span><img src="../../../images/google_developers_logo_white.png"></span>
     </article>
   </slide>
 
@@ -94,19 +147,26 @@
 <script type="application/dart">
 import 'dart:async';
 import 'dart:html';
+import 'package:js/js.dart' as js;
 
 var presentation_title = 'Our Awesome preso in Dart';
 var subtitle = 'A subtitle';
 var authors = 'Emily Fortuna and Siggi Cherem';
 var contact_info = '';
+var variable = '';
+
+List list = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
+String filter = '';
+Iterable get selected => list.where((e) => e.contains(filter));
 
 main() {
-  new Timer(new Duration(), present);  
+  runAsync(present);
 }
 
 present() {
   document.body.classes.add('loaded');
   var p = new Presentation();
+  js.context.prettyPrint();
 }
 
 class Presentation {
@@ -136,6 +196,7 @@ class Presentation {
   }
 
   handleKeydown(KeyEvent e) {
+    if (e.target != document.body) return;
     switch (e.keyCode) {
       case KeyCode.RIGHT:
       case KeyCode.SPACE:
@@ -148,6 +209,9 @@ class Presentation {
       case KeyCode.PAGE_UP:
       case KeyCode.UP:
         previous();
+        break;
+      case KeyCode.H:
+        document.body.classes.toggle('highlight-code');
         break;
     }
   }

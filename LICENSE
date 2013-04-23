@@ -1,8 +1,8 @@
 This license applies to all parts of Dart that are not externally maintained
 libraries. The external maintained libraries used by this project are under
-'js_deck/'.  The libraries may have their own licenses; we recommend you read
-them, as their terms may differ from the terms below.  Most of the original
-'js_deck' is distributed under the Apache Licence 2.0. 
+'js_deck/' and 'dart_prettify".  The libraries may have their own licenses; we
+recommend you read them, as their terms may differ from the terms below.  Most
+of the original code is distributed under the Apache Licence 2.0.
 
 Copyright 2012, the Dart project authors. All rights reserved.
 Redistribution and use in source and binary forms, with or without
