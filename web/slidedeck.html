@@ -2,13 +2,18 @@
 <html>
 <head>
 <link rel="stylesheet" media="all" href="../theme/css/default.css">
-<link rel="components" href="package:widget/components/accordion.html">
-<link rel="components" href="package:widget/components/collapse.html">
+<link rel="stylesheet" href="extra.css">
+<link rel="import" href="link_rel_slide.html">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+<link rel="import" href="custom_element_slide.html">
+<link rel="import" href="share_with_pub_slide.html">
 <script type="text/javascript" src="../js_deck/js/prettify/prettify.js"></script>
 <script type="text/javascript" src="../dart_prettify/lang-dart.js"></script>
 </head>
 <body style="opacity: 0">
 <slides class="layout-widescreen">
+
 
   <slide class="logoslide nobackground">
     <article class="flexbox vcenter">
@@ -21,9 +26,9 @@
       <img src="../../../images/google_developers_icon_128.png">
     </aside>
     <hgroup class="auto-fadein">
-      <h1>{{ presentation_title }}</h1>
-      <h2>{{ subtitle }}</h2>
-      <p>{{ authors }}</p>
+      <h1>Your Awesome Presentation in Dart</h1>
+      <h2>witty subtitle here</h2>
+      <p>Emily Fortuna and Sigmund Cherem</p>
     </hgroup>
   </slide>
 
@@ -33,8 +38,7 @@
     </hgroup>
     <article>
       <ul>
-        <li>Titles are formatted as Open Sans with bold applied and font size
-          is set at 45</li>
+        <li>Titles are formatted as Open Sans with bold applied and font size is set at 45</li>
         <li>Title capitalization is title case
           <ul>
             <li>Subtitle capitalization is title case</li>
@@ -55,8 +59,7 @@
       <p>A list where items build:</p>
       <ul class="build">
         <li>Pressing 'h' highlights code snippets</li>
-        <li>Pressing 'p' toggles speaker notes (if they're on the current
-          slide)</li>
+        <li>Pressing 'p' toggles speaker notes (if they're on the current slide)</li>
         <li>Pressing 'f' toggles fullscreen viewing</li>
         <li>Pressing 'w' toggles widescreen</li>
         <li>Pressing 'o' toggles overview mode</li>
@@ -66,116 +69,242 @@
       <ul class="build fade">
         <li>Hover over me!</li>
         <li>Hover over me!</li>
+        <li>Hover over me!</li>
       </ul>
     </article>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>An example</h2>
-      <h3>one below the other</h3>
+      <h2>Slide with (Smaller Font)</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+        <li>All <a href="http://google.com">links</a> open in new tabs.</li>
+        <li>To change that this, add <code>target="_self"</code> to the link.</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide hidden>
+    Hidden slides are left out of the presentation.
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Code Slide (with Subtitle Placeholder)</h2>
+      <h3>Subtitle Placeholder</h3>
     </hgroup>
     <article>
-      <pre class="prettyprint" data-lang="html">
-&lt;b>Text&lt;/b>: <b>{{'{{' | final }} variable }}</b>&lt;br>
-&lt;input type="text" <b>bind-value="variable"</b>>
+      <p>Press 'h' to highlight important sections of code (wrapped in <code>&lt;b&gt;</code>).</p>
+      <pre class="prettyprint" data-lang="javascript">
+&lt;script type='text/javascript'&gt;
+  // Say hello world until the user starts questioning
+  // the meaningfulness of their existence.
+  function helloWorld(world) {
+    <b>for (var i = 42; --i &gt;= 0;) {
+      alert('Hello ' + String(world));
+    }</b>
+  }
+&lt;/script&gt;
 </pre>
-      <pre data-lang="Running Demo">
-        <b>Text</b>: {{ variable }}<br>
-        <input type="text" bind-value="variable">
-      </pre>
     </article>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>An example</h2>
-      <h3>side by side</h3>
+      <h2>Code Slide (Smaller Font)</h2>
     </hgroup>
-    <article>
-      <table style="border-bottom: none"><tr></tr>
-      <tr>
-        <td>
+    <article class="smaller">
+      <pre class="prettyprint" data-lang="javascript">
+// Say hello world until the user starts questioning
+// the meaningfulness of their existence.
+function helloWorld(world) {
+  for (var i = 42; --i &gt;= 0;) {
+    alert('Hello ' + String(world));
+  }
+}
+</pre>
+<pre class="prettyprint" data-lang="css">
+&lt;style&gt;
+  p { color: pink }
+  b { color: blue }
+&lt;/style&gt;
+</pre>
 <pre class="prettyprint" data-lang="html">
-&lt;input type="text" bind-value="filter">
-&lt;ul>
-  &lt;li template repeat="e in selected">{{'{{'}}e}}&lt;/li>
-&lt;/ul>
+&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+  &lt;title>My Awesome Page&lt;/title>
+&lt;/head>
+&lt;body>
+  &lt;p&gt;Hello world&lt;/p&gt;
+&lt;body>
+&lt;/html>
 </pre>
-<pre class="prettyprint" data-lang="dart">
-List list = ['one', 'two', 'three',
-             'four', 'five', 'six', 'seven'];
-String filter = '';
-Iterable get selected =>
-     list.where((e) => e.contains(filter));
-</pre>
-        </td>
-        <td width="50%" style="vertical-align: top">
-          <div  style="background-color: #e6e6e6">
-          <input type="text" bind-value="filter">
-          <ul>
-            <li template repeat="e in selected">{{e}}</li>
-          </ul>
-          </div>
-        </td>
-      </tr></table>
     </article>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>An example</h2>
-      <h3>using components</h3>
+      <h2>Slide with Image</h2>
     </hgroup>
     <article>
-      <table style="border-bottom: none"><tr></tr>
-      <tr>
-        <td>
-          <pre class="prettyprint" data-lang="html">
-          some code
-          </pre>
-        </td>
-        <td width="50%" style="vertical-align: top">
-          <div  style="background-color: #e6e6e6">
-            <x-accordion>
-              <x-collapse>
-                <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse">The wolf</a>
-                </div>
-                <p>One wolf liked blowing down pig houses with his breath.</p>
-              </x-collapse>
-              <x-collapse>
-                <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse">2 pigs</a>
-                </div>
-                <p>Two little pigs were running from the wolf until they found
-                   their brother.
-                 </p>
-              </x-collapse>
-              <x-collapse>
-                <div class="accordion-heading">
-                  <a class="accordion-toggle" data-toggle="collapse">The brick
-                   house</a>
-                </div>
-                <p>Three little pigs lived happily in a brick house.</p>
-                </x-collapse>
-            </x-accordion>
-          </div>
-        </td>
-      </tr></table>
+      <img src="../../../images/chart.png" class="reflect" alt="Description" title="Description">
+      <footer class="source">source: place source info here</footer>
     </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Slide with Image (Centered horz/vert)</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <img src="../../../images/barchart.png" alt="Description" title="Description">
+      <footer class="source">source: place source info here</footer>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Table Option A</h2>
+      <h3>Subtitle Placeholder</h3>
+    </hgroup>
+    <article>
+      <table>
+        <tr>
+          <th></th><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th>
+        </tr>
+        <tr>
+          <td>Row 1</td><td>placeholder</td><td class="highlight">placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <td>Row 2</td><td>placeholder</td><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <td>Row 3</td><td>placeholder</td><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <td>Row 4</td><td>placeholder</td><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <td>Row 5</td><td>placeholder</td><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Table Option A (Smaller Text)</h2>
+      <h3>Subtitle Placeholder</h3>
+    </hgroup>
+    <article class="smaller">
+      <table>
+        <tr>
+          <th></th><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th>
+        </tr>
+        <tr>
+          <td>Row 1</td><td>placeholder</td><td class="highlight">placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <td>Row 2</td><td>placeholder</td><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <td>Row 3</td><td>placeholder</td><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <td>Row 4</td><td>placeholder</td><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <td>Row 5</td><td>placeholder</td><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Table Option B</h2>
+      <h3>Subtitle Placeholder</h3>
+    </hgroup>
+    <article>
+      <table class="rows">
+        <tr>
+          <th>Header 1</th><td>placeholder</td><td class="highlight">placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <th>Header 2</th><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <th>Header 3</th><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <th>Header 4</th><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+        <tr>
+          <th>Header 5</th><td>placeholder</td><td>placeholder</td><td>placeholder</td>
+        </tr>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Slide Styles</h2>
+    </hgroup>
+    <article class="smaller">
+      <div class="columns-2">
+        <ul>
+          <li class="red">class="red"</li>
+          <li class="red2">class="red2"</li>
+          <li class="red3">class="red3"</li>
+          <li class="blue">class="blue"</li>
+          <li class="blue2">class="blue2"</li>
+          <li class="blue3">class="blue3"</li>
+          <li class="green">class="green"</li>
+          <li class="green2">class="green2"</li>
+        </ul>
+        <ul>
+          <li class="green3">class="green3"</li>
+          <li class="yellow">class="yellow"</li>
+          <li class="yellow2">class="yellow2"</li>
+          <li class="yellow3">class="yellow3"</li>
+          <li class="gray">class="gray"</li>
+          <li class="gray2">class="gray2"</li>
+          <li class="gray3">class="gray3"</li>
+          <li class="gray4">class="gray4"</li>
+        </ul>
+      </div>
+      <div class="centered" style="margin-top:2em">
+        I am centered text with a <button>Button</button> and <button disabled>Disabled</button> button.
+      </div>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="../../../images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Segue Slide</h2>
+      <h3>Subtitle Placeholder</h3>
+    </hgroup>
+  </slide>
+
+  <slide class="fill nobackground" style="background-image: url(../../../images/sky.jpg)">
+    <hgroup>
+      <h2 class="white">Full Image (with Optional Header)</h2>
+    </hgroup>
+    <footer class="source white">www.flickr.com/photos/25797459@N06/5438799763/</footer>
   </slide>
 
   <slide class="thank-you-slide segue nobackground">
-    <aside class="gdbar right">
-      <img src="../../../images/google_developers_icon_128.png">
-    </aside>
+    <aside class="gdbar right"><img src="../../../images/google_developers_icon_128.png"></aside>
     <article class="flexbox vleft auto-fadein">
       <h2>&lt;Thank You!&gt;</h2>
       <p>Important contact information goes here.</p>
     </article>
     <p class="auto-fadein" data-config-contact>
-      {{ contact_info }}
+      <!-- populated from slide_config.json -->
     </p>
   </slide>
 
@@ -189,160 +318,6 @@ Iterable get selected =>
 
 </slides>
 
-<script type="application/dart">
-import 'dart:async';
-import 'dart:html';
-import 'package:js/js.dart' as js;
-
-var presentation_title = 'Our Awesome preso in Dart';
-var subtitle = 'A subtitle';
-var authors = 'Emily Fortuna and Siggi Cherem';
-var contact_info = '';
-var variable = '';
-
-List list = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
-String filter = '';
-Iterable get selected => list.where((e) => e.contains(filter));
-
-main() {
-  runAsync(present);
-}
-
-present() {
-  document.body.classes.add('loaded');
-  var p = new Presentation();
-  js.context.prettyPrint();
-}
-
-class Presentation {
-  int _currentSlideIndex;
-  List<Element> _slides;
-
-  Presentation() {
-    KeyboardEventStream.onKeyDown(document.body).listen(handleKeydown);
-    _slides = document.queryAll('slide:not([hidden]):not(.backdrop)');
-    try {
-      _currentSlideIndex = int.parse(window.location.hash.substring(1));
-    } catch (Exception) {
-      _currentSlideIndex = 0;
-    }
-    initBuildInLists();
-    _slides[_currentSlideIndex].classes.add('current');
-  }
-
-  void initBuildInLists() {
-    var buildItems = document.queryAll('.build > *');
-    for (Element item in buildItems) {
-      item.classes.add('to-build');
-      if (item.parent.classes.contains('fade')) {
-        item.classes.add('fade');
-      }
-    }
-  }
-
-  handleKeydown(KeyEvent e) {
-    if (e.target != document.body) return;
-    switch (e.keyCode) {
-      case KeyCode.RIGHT:
-      case KeyCode.SPACE:
-      case KeyCode.PAGE_DOWN:
-      case KeyCode.DOWN:
-        next();
-        break;
-      case KeyCode.LEFT:
-      case KeyCode.BACKSPACE:
-      case KeyCode.PAGE_UP:
-      case KeyCode.UP:
-        previous();
-        break;
-      case KeyCode.H:
-        document.body.classes.toggle('highlight-code');
-        break;
-    }
-  }
-
-  /**
-   * Attempt to make the next incremental item on this particular slide appear. 
-   * Return true if we successfully built something additional onto the slide,
-   * false if there was nothing additional to build onto this slide.
-   */
-  bool buildNextItem() {
-    var itemToBuildNext = currentSlide.query('.to-build');
-    var currentlyBuilt = currentSlide.query('.build-current');
-
-    if (currentlyBuilt != null) {
-      currentlyBuilt.classes.remove('build-current');
-      if (currentlyBuilt.classes.contains('fade')) {
-        currentlyBuilt.classes.add('build-fade');
-      }
-    }
-
-    if (itemToBuildNext == null) {
-      // Go to next slide.
-      // TODO(efortuna): Change this when jQuery CL goes in.
-      currentSlide.queryAll('.build-fade').forEach(
-          (e) => e.classes.remove('build-fade'));
-      return false;
-    } else {
-      itemToBuildNext.classes.remove('to-build');
-      itemToBuildNext.classes.add('build-current');
-      return true;
-    }
-  }
-
-  Element get currentSlide => _slides[_currentSlideIndex];
-
-  /**
-   * Move to the next item, be it building in the next item on the current
-   * slide, or advancing to the next slide.
-   */
-  next() {
-    if (!buildNextItem()) {
-      // Move to next slide, if possible.
-      if(_currentSlideIndex < _slides.length - 1) {
-        _currentSlideIndex++;
-        _updateSlides();
-      }
-    }
-  }
-
-  _updateSlides() {
-    var currentSlide = _currentSlideIndex;
-
-    // Remove all slide classes because we're advancing them all.
-    // TODO(efortuna): jQuery update.
-    _slides.forEach((slide) => slide.classes.removeAll(
-        ['far-past', 'past', 'current', 'next', 'far-next']));
-
-    for (int i = 0; i < _slides.length; i++) {
-      switch(i) {
-        case currentSlide - 2:
-          _slides[i].classes.add('far-past');
-          break;
-        case currentSlide - 1:
-          _slides[i].classes.add('past');
-          break;
-        case currentSlide:
-          _slides[i].classes.add('current');
-          break;
-        case currentSlide + 1:
-          _slides[i].classes.add('next');
-          break;
-        case currentSlide + 2:
-          _slides[i].classes.add('far-next');
-          break;
-      }
-    }
-    window.location.replace('#$_currentSlideIndex');
-  }
-
-  previous() {
-    if(_currentSlideIndex > 0) {
-      _currentSlideIndex--;
-      _updateSlides();
-    }
-  }
-}
-</script>
+<script type="application/dart" src="present.dart"></script>
 </body>
 </html>

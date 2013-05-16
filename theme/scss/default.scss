@@ -139,10 +139,10 @@ slides > slide {
     .auto-fadein {
       opacity: 1;
     }
-
+    
     .gdbar {
       @include background-size(100% 100%);
-    }
+    } 
   }
 
   &.next {
@@ -182,7 +182,6 @@ slides > slide {
     }
     &:after {
       font-size: 12pt;
-      content: attr(data-slide-num) '/' attr(data-total-slides);
       position: absolute;
       bottom: $slide-top-bottom-padding / 2;
       right: $slide-left-right-padding;
@@ -372,8 +371,8 @@ ul {
 
 pre {
   font-family: 'Source Code Pro', 'Courier New', monospace;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 24px;
+  line-height: 32px;
   padding: 10px 0 10px $slide-left-right-padding;
   letter-spacing: -1px;
   margin-bottom: 20px;
@@ -919,6 +918,10 @@ aside.gdbar {
   }
 }
 
+.extra-bold {
+  font-weight: 800;
+}
+
 .title-slide {
 
   hgroup {
@@ -1081,3 +1084,82 @@ aside.gdbar {
     font-family: monospace !important;
   }
 }
+
+.animated {
+	-webkit-animation-duration: 1s;
+	   -moz-animation-duration: 1s;
+	     -o-animation-duration: 1s;
+	        animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
+}
+
+@-webkit-keyframes swing { 
+	20%, 40%, 60%, 80%, 100% { -webkit-transform-origin: top center; } 
+	20% { -webkit-transform: rotate(15deg); }	 
+	40% { -webkit-transform: rotate(-10deg); } 
+	60% { -webkit-transform: rotate(5deg); }	 
+	80% { -webkit-transform: rotate(-5deg); }	 
+	100% { -webkit-transform: rotate(0deg); } 
+} 
+ 
+@-moz-keyframes swing { 
+	20% { -moz-transform: rotate(15deg); }	 
+	40% { -moz-transform: rotate(-10deg); } 
+	60% { -moz-transform: rotate(5deg); }	 
+	80% { -moz-transform: rotate(-5deg); }	 
+	100% { -moz-transform: rotate(0deg); } 
+} 
+ 
+@-o-keyframes swing { 
+	20% { -o-transform: rotate(15deg); }	 
+	40% { -o-transform: rotate(-10deg); } 
+	60% { -o-transform: rotate(5deg); }	 
+	80% { -o-transform: rotate(-5deg); }	 
+	100% { -o-transform: rotate(0deg); } 
+} 
+ 
+@keyframes swing { 
+	20% { transform: rotate(15deg); }	 
+	40% { transform: rotate(-10deg); } 
+	60% { transform: rotate(5deg); }	 
+	80% { transform: rotate(-5deg); }	 
+	100% { transform: rotate(0deg); } 
+} 
+ 
+.swing { 
+	-webkit-transform-origin: top center; 
+	-moz-transform-origin: top center; 
+	-o-transform-origin: top center; 
+	transform-origin: top center; 
+	-webkit-animation-name: swing; 
+	-moz-animation-name: swing; 
+	-o-animation-name: swing; 
+	animation-name: swing; 
+}
+
+.extra-shadow {
+  -webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+  -moz-box-shadow:    0px 0px 15px 16px rgb(255, 209, 77);
+  -webkit-box-shadow: 0px 0px 15px 16px rgb(255, 209, 77);
+  box-shadow:         0px 0px 15px 16px rgb(255, 209, 77);
+}
+
+
+.standout {
+  color: rgb(209, 80, 122); font: bold 52px;
+	text-shadow: 1px 1px #404040, 2px 2px #404040, 3px 3px #404040;
+	-webkit-transition: all 0.12s ease-out;
+	-moz-transition: all 0.12s ease-out;
+	-o-transition: all 0.12s ease-out;
+}
+.standout:hover {
+  color: #404040;
+  position: relative; top: -3px; left: -3px; 
+  text-shadow: 1px 1px rgb(13, 168, 97), 2px 2px rgb(13, 168, 97), 3px 3px rgb(13, 168, 97), 4px 4px rgb(13, 168, 97), 5px 5px rgb(13, 168, 97), 6px 6px rgb(13, 168, 97);
+}
+
